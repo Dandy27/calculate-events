@@ -21,9 +21,24 @@ class BaseScreen extends StatelessWidget {
               title: Text('Home'),
             ),
           ),
-          Container(color: Colors.red,),
-          Container(color: Colors.yellow),
-          Container(color: Colors.green,),
+          Scaffold(
+            drawer: CustomDrawer(),
+            appBar: AppBar(
+              title: Text('Home1'),
+            ),
+          ),
+          Scaffold(
+            drawer: CustomDrawer(),
+            appBar: AppBar(
+              title: Text('Home2'),
+            ),
+          ),
+          Scaffold(
+            drawer: CustomDrawer(),
+            appBar: AppBar(
+              title: Text('Home3'),
+            ),
+          )
         ],
       ),
     );
