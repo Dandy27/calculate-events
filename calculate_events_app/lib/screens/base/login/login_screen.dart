@@ -11,10 +11,12 @@ class LoginScreen extends StatelessWidget {
   final TextEditingController passController = TextEditingController();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       backgroundColor: Colors.white,
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -96,10 +98,23 @@ class LoginScreen extends StatelessWidget {
                           onPressed: () {
                             if (formKey.currentState.validate()) {
                               context.read<UserManager>().signIn(
-                                User(
+                                user: User(
                                   email: emailController.text,
-                                  password: passController.text
-                                )
+                                  password: passController.text,
+
+                                ),
+                                onFail: (e){
+                                  // ignore: deprecated_member_use
+                                  scaffoldKey.currentState.showSnackBar(
+                                    // SHOWSNACKBAR DEPRECARIADO PESQUISAR
+                                    SnackBar(
+                                      content: Text('Falha ao entrar: $e '),
+                                      backgroundColor: Theme.of(context).accentColor,
+                                    ));
+                                },
+                                onSuccess: (){
+                                  // TODO: FECHAR A TELA DE LOGIN
+                                }
                               );
                             }
                           },
