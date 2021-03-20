@@ -1,7 +1,10 @@
 import 'package:calculate_events_app/helpers/validators.dart';
+import 'package:calculate_events_app/models/user.dart';
+import 'package:calculate_events_app/models/user_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -92,7 +95,12 @@ class LoginScreen extends StatelessWidget {
                         child: ElevatedButton(
                           onPressed: () {
                             if (formKey.currentState.validate()) {
-                              print(emailController.text);
+                              context.read<UserManager>().signIn(
+                                User(
+                                  email: emailController.text,
+                                  password: passController.text
+                                )
+                              );
                             }
                           },
                           child: const Text(
