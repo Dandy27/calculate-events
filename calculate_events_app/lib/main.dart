@@ -10,14 +10,14 @@ void main() {
     builder: (_) => MyApp()
   ));
 
-  Firestore.instance.collection('teste').add({'teste': 'teste'});
+  // Firestore.instance.collection('teste').add({'teste': 'teste'});
 
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Provider(
+    return ChangeNotifierProvider(
       create: (_) => UserManager(),
       child: MaterialApp(
         title: 'Calculate Events',
