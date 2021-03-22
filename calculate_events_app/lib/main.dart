@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primaryColor: Color(0xFF0561F9),
-          accentColor: Color(0xFFD90D69)
+          accentColor: Color(0xFFD90D69),
         ),
         builder: DevicePreview.appBuilder,
         locale: DevicePreview.locale(context),
