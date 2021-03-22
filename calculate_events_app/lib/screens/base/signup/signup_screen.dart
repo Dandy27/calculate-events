@@ -1,9 +1,10 @@
 import 'package:calculate_events_app/helpers/validators.dart';
 import 'package:calculate_events_app/models/user.dart';
+import 'package:calculate_events_app/models/user_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatelessWidget {
-
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -44,9 +45,9 @@ class SignUpScreen extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                       autocorrect: false,
                       validator: (name) {
-                        if(name.isEmpty)
+                        if (name.isEmpty)
                           return 'Campo obrigatório';
-                        else if(name.trim().split(' ').length <= 1)
+                        else if (name.trim().split(' ').length <= 1)
                           return 'Preencha seu nome completo';
                         return null;
                       },
@@ -70,10 +71,9 @@ class SignUpScreen extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                       autocorrect: false,
                       validator: (email) {
-                        if(email.isEmpty)
+                        if (email.isEmpty)
                           return 'Campo obrigatório';
-                        else if(!emailValid(email))
-                          return 'Email inválido';
+                        else if (!emailValid(email)) return 'Email inválido';
                         return null;
                       },
                     ),
@@ -89,11 +89,10 @@ class SignUpScreen extends StatelessWidget {
                         borderRadius: BorderRadius.all(Radius.circular(5))),
                     child: TextFormField(
                       onSaved: (pass) => user.password = pass,
-                      validator: (pass){
-                        if(pass.isEmpty)
+                      validator: (pass) {
+                        if (pass.isEmpty)
                           return 'Campo Obrigatório';
-                        else if(pass.length < 6)
-                          return 'Senha muito curta';
+                        else if (pass.length < 6) return 'Senha muito curta';
                         return null;
                       },
                       decoration: InputDecoration(
@@ -114,11 +113,10 @@ class SignUpScreen extends StatelessWidget {
                         borderRadius: BorderRadius.all(Radius.circular(5))),
                     child: TextFormField(
                       onSaved: (pass) => user.confirmPassword = pass,
-                      validator: (pass){
-                        if(pass.isEmpty)
+                      validator: (pass) {
+                        if (pass.isEmpty)
                           return 'Campo obrigatório';
-                        else if(pass.length < 6)
-                          return 'Senha muito fraca';
+                        else if (pass.length < 6) return 'Senha muito fraca';
                         return null;
                       },
                       decoration: InputDecoration(
@@ -138,23 +136,34 @@ class SignUpScreen extends StatelessWidget {
                         style: TextStyle(fontSize: 18),
                       ),
                       onPressed: () {
-                        if(formKey.currentState.validate()){
+                        if (formKey.currentState.validate()) {
                           formKey.currentState.save();
 
-                          if(user.password != user.confirmPassword){
-                            scaffoldKey.currentState.showSnackBar(
-                                SnackBar(
-                                  content: const Text(
-                                      'Senhas não coincidem!'),
-                                  backgroundColor:
-                                  Theme.of(context)
-                                      .accentColor,
-                                )
-                            );
+                          if (user.password != user.confirmPassword) {
+                            scaffoldKey.currentState.showSnackBar(SnackBar(
+                              content: const Text(
+                                'Senhas não coincidem!',
+                              ),
+                              backgroundColor: Theme.of(context).accentColor,
+                            ));
 
                             return;
                           }
-                          //usermanager
+                          context.read<UserManager>().signUp(
+                              user: user,
+                              onSuccess: () {
+                                debugPrint('sucesso');
+                                //TODO: POP
+                              },
+                              onFail: (e) {
+                                scaffoldKey.currentState.showSnackBar(
+                                    // SHOWSNACKBAR DEPRECARIADO PESQUISAR
+                                    SnackBar(
+                                  content: Text('Falha ao cadastrar: $e'),
+                                  backgroundColor:
+                                      Theme.of(context).accentColor,
+                                ));
+                              });
                         }
                       },
                     )),
