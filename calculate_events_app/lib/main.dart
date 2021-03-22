@@ -1,17 +1,15 @@
 import 'package:calculate_events_app/models/user_manager.dart';
 import 'package:calculate_events_app/screens/base/base_screen.dart';
+import 'package:calculate_events_app/screens/base/signup/signup_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(DevicePreview(
-    builder: (_) => MyApp()
-  ));
+  runApp(DevicePreview(builder: (_) => MyApp()));
 
   // Firestore.instance.collection('teste').add({'teste': 'teste'});
-
 }
 
 class MyApp extends StatelessWidget {
@@ -28,11 +26,18 @@ class MyApp extends StatelessWidget {
         ),
         builder: DevicePreview.appBuilder,
         locale: DevicePreview.locale(context),
-        home: LayoutBuilder(
-          builder: (context, constraints){
-            return BaseScreen();
-          },
-        )
+        initialRoute: '/base',
+        onGenerateRoute: (settings) {
+          switch (settings.name) {
+            case '/signup':
+              return MaterialPageRoute(builder: (_) => SignUpScreen());
+            case '/base':
+            default:
+              return MaterialPageRoute(
+                builder: (_) => BaseScreen(),
+              );
+          }
+        },
       ),
     );
   }

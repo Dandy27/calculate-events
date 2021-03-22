@@ -123,8 +123,8 @@ class LoginScreen extends StatelessWidget {
                                     },
                               child: userManager.loading
                                   ? CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation(Theme.of(context).accentColor)
-                              )
+                                      valueColor: AlwaysStoppedAnimation(
+                                          Theme.of(context).accentColor))
                                   : const Text(
                                       'Entrar',
                                       style: TextStyle(
@@ -133,7 +133,18 @@ class LoginScreen extends StatelessWidget {
                                           color: Colors.white),
                                     ),
                             ),
-                          )
+                          ),
+                          SizedBox(height: 15,),
+                          TextButton(
+                            onPressed: () {
+                               Navigator.of(context).pushReplacementNamed('/signup');
+                            },
+                            child: Text('Criar uma Conta',
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
                         ],
                       );
                     },
