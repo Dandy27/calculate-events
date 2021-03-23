@@ -88,7 +88,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                           SizedBox(height: 16),
                           child,
-                          // WIDGET DO CONSUMER , FIANL DA LISTA
+                          // WIDGET DO CONSUMER , FINAL DA LISTA
                           SizedBox(height: 16),
                           SizedBox(
                             height: 52,
@@ -116,7 +116,7 @@ class LoginScreen extends StatelessWidget {
                                                 ));
                                               },
                                               onSuccess: () {
-                                                // TODO: FECHAR A TELA DE LOGIN
+                                                Navigator.of(context).pop();
                                               },
                                             );
                                       }
@@ -137,7 +137,7 @@ class LoginScreen extends StatelessWidget {
                           SizedBox(height: 15,),
                           TextButton(
                             onPressed: () {
-                               Navigator.of(context).pushReplacementNamed('/signup');
+                               Navigator.of(context).pushNamed('/signup');
                             },
                             child: Text('Criar uma Conta',
                               style: TextStyle(

@@ -1,5 +1,6 @@
 import 'package:calculate_events_app/models/user_manager.dart';
 import 'package:calculate_events_app/screens/base/base_screen.dart';
+import 'package:calculate_events_app/screens/base/login/login_screen.dart';
 import 'package:calculate_events_app/screens/base/signup/signup_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_preview/device_preview.dart';
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => UserManager(),
+      lazy: false,
       child: MaterialApp(
         title: 'Calculate Events',
         debugShowCheckedModeBanner: false,
@@ -29,6 +31,8 @@ class MyApp extends StatelessWidget {
         initialRoute: '/base',
         onGenerateRoute: (settings) {
           switch (settings.name) {
+            case '/login':
+              return MaterialPageRoute(builder: (_) => LoginScreen());
             case '/signup':
               return MaterialPageRoute(builder: (_) => SignUpScreen());
             case '/base':
