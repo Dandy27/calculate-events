@@ -7,12 +7,17 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() {
-  runApp(DevicePreview(
-      builder: (_) => MyApp()));
+// void main() {
+//   runApp(DevicePreview(
+//       builder: (_) => MyApp()));
+
+void main(){
+  runApp(MyApp());
+}
 
   // Firestore.instance.collection('teste').add({'teste': 'teste'});
-}
+// }
+
 
 class MyApp extends StatelessWidget {
   @override
@@ -27,8 +32,8 @@ class MyApp extends StatelessWidget {
           primaryColor: Color(0xFF0561F9),
           accentColor: Color(0xFFD90D69),
         ),
-        builder: DevicePreview.appBuilder,
-        locale: DevicePreview.locale(context),
+        // builder: DevicePreview.appBuilder,
+        // locale: DevicePreview.locale(context),
         initialRoute: '/base',
         onGenerateRoute: (settings) {
           switch (settings.name) {
