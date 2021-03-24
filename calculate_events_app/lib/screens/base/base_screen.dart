@@ -4,6 +4,8 @@ import 'package:calculate_events_app/screens/base/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'home_screen.dart';
+
 class BaseScreen extends StatelessWidget {
 
   final PageController _pageController = PageController();
@@ -16,6 +18,7 @@ class BaseScreen extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         controller: _pageController,
         children: [
+          HomeScreen(),
           Scaffold(
             drawer: CustomDrawer(),
             appBar: AppBar(
