@@ -11,7 +11,7 @@ class LoginScreen extends StatelessWidget {
   final TextEditingController passController = TextEditingController();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldMessengerState> scaffoldKey = GlobalKey<ScaffoldMessengerState>();
 
   @override
   Widget build(BuildContext context) {
@@ -97,23 +97,22 @@ class LoginScreen extends StatelessWidget {
                                   ? null
                                   : () {
                                       if (formKey.currentState.validate()) {
-                                        context.read<UserManager>().signIn(
+                                        userManager.signIn(
                                               user: User(
                                                 email: emailController.text,
                                                 password: passController.text,
                                               ),
                                               onFail: (e) {
-                                                // ignore: deprecated_member_use
                                                 scaffoldKey.currentState
                                                     .showSnackBar(
-                                                        // SHOWSNACKBAR DEPRECARIADO PESQUISAR
-                                                        SnackBar(
-                                                  content: Text(
-                                                      'Falha ao entrar: $e '),
-                                                  backgroundColor:
-                                                      Theme.of(context)
-                                                          .accentColor,
-                                                ));
+                                                  SnackBar(
+                                                    content: Text(
+                                                        'Falha ao entrar: $e '),
+                                                    backgroundColor:
+                                                        Theme.of(context)
+                                                            .accentColor,
+                                                  ),
+                                                );
                                               },
                                               onSuccess: () {
                                                 Navigator.of(context).pop();
@@ -124,7 +123,7 @@ class LoginScreen extends StatelessWidget {
                               child: userManager.loading
                                   ? CircularProgressIndicator(
                                       valueColor: AlwaysStoppedAnimation(
-                                          Theme.of(context).accentColor))
+                                          Colors.white))
                                   : const Text(
                                       'Entrar',
                                       style: TextStyle(
@@ -134,12 +133,15 @@ class LoginScreen extends StatelessWidget {
                                     ),
                             ),
                           ),
-                          SizedBox(height: 15,),
+                          SizedBox(
+                            height: 15,
+                          ),
                           TextButton(
                             onPressed: () {
-                               Navigator.of(context).pushNamed('/signup');
+                              Navigator.of(context).pushNamed('/signup');
                             },
-                            child: Text('Criar uma Conta',
+                            child: Text(
+                              'Criar uma Conta',
                               style: TextStyle(
                                 fontSize: 20,
                               ),

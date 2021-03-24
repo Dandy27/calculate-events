@@ -6,7 +6,8 @@ import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldMessengerState> scaffoldKey =
+      GlobalKey<ScaffoldMessengerState>();
 
   final User user = User();
 
@@ -130,43 +131,43 @@ class SignUpScreen extends StatelessWidget {
                   SizedBox(
                     height: 52,
                     child: MouseRegion(
-                        child: ElevatedButton(
-                      child: Text(
-                        'Criar Conta',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      onPressed: () {
-                        if (formKey.currentState.validate()) {
-                          formKey.currentState.save();
+                      child: ElevatedButton(
+                        child: Text(
+                          'Criar Conta',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        onPressed: () {
+                          if (formKey.currentState.validate()) {
+                            formKey.currentState.save();
 
-                          if (user.password != user.confirmPassword) {
-                            scaffoldKey.currentState.showSnackBar(SnackBar(
-                              content: const Text(
-                                'Senhas não coincidem!',
-                              ),
-                              backgroundColor: Theme.of(context).accentColor,
-                            ));
-
-                            return;
+                            if (user.password != user.confirmPassword) {
+                              scaffoldKey.currentState.showSnackBar(SnackBar(
+                                content: const Text(
+                                  'Senhas não coincidem!',
+                                ),
+                                backgroundColor: Theme.of(context).accentColor,
+                              ));
+                              return;
+                            }
+                            context.read<UserManager>().signUp(
+                                  user: user,
+                                  onSuccess: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  onFail: (e) {
+                                    scaffoldKey.currentState.showSnackBar(
+                                      SnackBar(
+                                        content: Text('Falha ao cadastrar: $e'),
+                                        backgroundColor:
+                                            Theme.of(context).accentColor,
+                                      ),
+                                    );
+                                  },
+                                );
                           }
-                          context.read<UserManager>().signUp(
-                              user: user,
-                              onSuccess: () {
-                                debugPrint('sucesso');
-                                Navigator.of(context).pop();
-                              },
-                              onFail: (e) {
-                                scaffoldKey.currentState.showSnackBar(
-                                    // SHOWSNACKBAR DEPRECARIADO PESQUISAR
-                                    SnackBar(
-                                  content: Text('Falha ao cadastrar: $e'),
-                                  backgroundColor:
-                                      Theme.of(context).accentColor,
-                                ));
-                              });
-                        }
-                      },
-                    )),
+                        },
+                      ),
+                    ),
                   )
                 ],
               ),
