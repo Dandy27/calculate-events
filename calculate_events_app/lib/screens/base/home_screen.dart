@@ -60,7 +60,7 @@ class _HomeState extends State<Home> {
       if ((pesoGrfAberta >= tara) &&
           (pesoGrfAberta <= pesoBruto) &&
           (quantDoses >= 1)) {
-        _infoText = 'Result: (${total.toStringAsFixed(1)}) doses';
+        _infoText = '(${total.toStringAsFixed(1)}) doses';
       } else {
         _infoText = 'ERROR';
       }
@@ -76,13 +76,18 @@ class _HomeState extends State<Home> {
           return <Widget>[
             SliverAppBar(
               actions: [
-                IconButton(
-                  onPressed: () {
-                    _resetFields();
-                  },
-                  icon: Icon(
-                    Icons.refresh,
-                    color: Colors.white,
+                SizedBox(
+                  width: 50,
+                  child: IconButton(
+                    padding: EdgeInsets.only(right: 20),
+                    onPressed: () {
+                      _resetFields();
+                    },
+                    icon: Icon(
+                      Icons.refresh,
+                      color: Colors.white,
+                      size: 25,
+                    ),
                   ),
                 )
               ],
@@ -97,7 +102,19 @@ class _HomeState extends State<Home> {
                         fontSize: 20.0,
                       )),
                   background: Image.network(
-                    "https://images.pexels.com/photos/396547/pexels-photo-396547.jpeg?auto=compress&cs=tinysrgb&h=350",
+                    // "https://images.pexels.com/photos/396547/pexels-photo-396547.jpeg?auto=compress&cs=tinysrgb&h=350"
+                  // 'https://images.pexels.com/photos/401098/pexels-photo-401098.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+                // 'https://images.pexels.com/photos/989959/pexels-photo-989959.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
+// 'https://s1.static.brasilescola.uol.com.br/be/conteudo/images/gua.jpg'
+//                   'https://static.mundoeducacao.uol.com.br/mundoeducacao/conteudo_legenda/83e137b1b6a951e41d3b9552d26fa52a.jpg'
+//                   'https://www.falamart.com.br/wp-content/uploads/2018/12/garrafas-lista-de-bebidas.jpg'
+// 'https://jordanaribeiropsi.files.wordpress.com/2016/06/bebidas.jpg?w=640'
+              // 'https://asset1.zankyou.com/images/mag-card-c/d66/f6e3/878/623/-/br/wp-content/uploads/2019/04/z-capa-top.jpg'
+// 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrx0w5AksNH0eRck5AKlGPRNeWh539Z2VvyOI0_8IBig0BM5P5mc3Qwdds-iUD0at__10&usqp=CAU'
+'https://bsbflash.com.br/wp-content/uploads/2020/02/gin-sabores-diferentes.jpg'
+
+
+                  ,
                     fit: BoxFit.cover,
                   )),
             ),
