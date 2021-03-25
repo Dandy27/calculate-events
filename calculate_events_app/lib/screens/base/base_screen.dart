@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'home_screen.dart';
+import 'home_screen.dart';
 
 class BaseScreen extends StatelessWidget {
 
@@ -18,7 +19,7 @@ class BaseScreen extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         controller: _pageController,
         children: [
-          HomeScreen(),
+          Home(),
           Scaffold(
             drawer: CustomDrawer(),
             appBar: AppBar(
