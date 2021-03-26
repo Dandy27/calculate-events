@@ -5,12 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
+import 'components/search_dialog.dart';
+
 class ProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: CustomDrawer(),
       appBar: AppBar(
+        actions: [
+          IconButton(icon: Icon(Icons.search), onPressed: (){
+            showDialog(context: context, builder: (_) => SearchDialog());
+          })
+        ],
         elevation: 0,
         title: const Text('Produtos'),
         centerTitle: true,
