@@ -1,3 +1,4 @@
+import 'package:calculate_events_app/models/product_manager.dart';
 import 'package:calculate_events_app/models/user_manager.dart';
 import 'package:calculate_events_app/screens/base/base_screen.dart';
 import 'package:calculate_events_app/screens/base/login/login_screen.dart';
@@ -9,16 +10,23 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(DevicePreview(builder: (_) => MyApp()));
-
 }
 // Firestore.instance.collection('teste').add({'teste': 'teste'});
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => UserManager(),
-      lazy: false,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => UserManager(),
+          lazy: false,
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ProductManager(),
+          lazy: false,
+        )
+      ],
       child: MaterialApp(
         title: 'Calculate Events',
         debugShowCheckedModeBanner: false,
