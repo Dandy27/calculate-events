@@ -2,7 +2,6 @@ import 'package:calculate_events_app/common/custom_drawer/custom_drawer.dart';
 import 'package:calculate_events_app/models/product_manager.dart';
 import 'package:calculate_events_app/screens/products/components/product_list_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import 'components/search_dialog.dart';
@@ -14,9 +13,15 @@ class ProductsScreen extends StatelessWidget {
       drawer: CustomDrawer(),
       appBar: AppBar(
         actions: [
-          IconButton(icon: Icon(Icons.search), onPressed: (){
-            showDialog(context: context, builder: (_) => SearchDialog());
-          })
+          IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () async {
+                final search = await showDialog<String>(
+                    context: context, builder: (_) => SearchDialog());
+                if(search != null){
+                  context.read<ProductManager>().search = search;
+                }
+              })
         ],
         elevation: 0,
         title: const Text('Produtos'),
@@ -24,16 +29,16 @@ class ProductsScreen extends StatelessWidget {
       ),
       body: Consumer<ProductManager>(
         builder: (_, productManager, __) {
+          final filteredProducts = productManager.filteredProducts;
           return ListView.builder(
-            padding: const EdgeInsets.all(4),
-              itemCount: productManager.allProducts.length,
+              padding: const EdgeInsets.all(4),
+              itemCount: filteredProducts.length,
               itemBuilder: (_, index) {
-                return ProductListTile(productManager.allProducts[index]);
+                return ProductListTile(filteredProducts[index]);
               });
         },
       ),
       backgroundColor: Theme.of(context).primaryColor,
-
     );
   }
 }
