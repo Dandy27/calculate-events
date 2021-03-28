@@ -1,8 +1,10 @@
+import 'package:calculate_events_app/models/product.dart';
 import 'package:calculate_events_app/models/product_manager.dart';
 import 'package:calculate_events_app/models/user_manager.dart';
 import 'package:calculate_events_app/screens/base/base_screen.dart';
 import 'package:calculate_events_app/screens/base/login/login_screen.dart';
 import 'package:calculate_events_app/screens/base/signup/signup_screen.dart';
+import 'package:calculate_events_app/screens/product/product_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +45,10 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(builder: (_) => LoginScreen());
             case '/signup':
               return MaterialPageRoute(builder: (_) => SignUpScreen());
+            case '/product':
+              return MaterialPageRoute(builder: (_) => ProductScreen(
+                  settings.arguments as Product
+              ));
             case '/base':
             default:
               return MaterialPageRoute(
