@@ -76,19 +76,26 @@ class _HomeState extends State<Home> {
           return <Widget>[
             SliverAppBar(
               actions: [
-                SizedBox(
-                  width: 50,
-                  child: IconButton(
-                    padding: EdgeInsets.only(right: 20),
-                    onPressed: () {
-                      _resetFields();
-                    },
-                    icon: Icon(
-                      Icons.refresh,
-                      color: Colors.white,
-                      size: 25,
+                Row(
+                  children: [
+                    IconButton(icon: Icon(Icons.add), onPressed: (){
+                      Navigator.of(context).pushNamed('/cadastrar');
+                    }),
+                    SizedBox(
+                      width: 50,
+                      child: IconButton(
+                        padding: EdgeInsets.only(right: 20),
+                        onPressed: () {
+                          _resetFields();
+                        },
+                        icon: Icon(
+                          Icons.refresh,
+                          color: Colors.white,
+                          size: 25,
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 )
               ],
               expandedHeight: 200.0,

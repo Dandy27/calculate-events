@@ -4,14 +4,17 @@ import 'package:calculate_events_app/models/user_manager.dart';
 import 'package:calculate_events_app/screens/base/base_screen.dart';
 import 'package:calculate_events_app/screens/base/login/login_screen.dart';
 import 'package:calculate_events_app/screens/base/signup/signup_screen.dart';
+import 'package:calculate_events_app/screens/cadastrar.dart';
 import 'package:calculate_events_app/screens/product/product_screen.dart';
+import 'package:calculate_events_app/screens/products/list_product.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(DevicePreview(builder: (_) => MyApp()));
+  // runApp(DevicePreview(builder: (_) => MyApp()));
+  runApp(MyApp());
 }
 // Firestore.instance.collection('teste').add({'teste': 'teste'});
 
@@ -36,11 +39,15 @@ class MyApp extends StatelessWidget {
           primaryColor: Color(0xFF0561F9),
           accentColor: Color(0xFFD90D69),
         ),
-        builder: DevicePreview.appBuilder,
-        locale: DevicePreview.locale(context),
+        // builder: DevicePreview.appBuilder,
+        // locale: DevicePreview.locale(context),
         initialRoute: '/base',
         onGenerateRoute: (settings) {
           switch (settings.name) {
+            case '/lista_produtos':
+              return MaterialPageRoute(builder: (_) => ListProductScreen());
+            case '/cadastrar':
+              return MaterialPageRoute(builder: (_) => CadastrarScreen());
             case '/login':
               return MaterialPageRoute(builder: (_) => LoginScreen());
             case '/signup':
